@@ -50,7 +50,7 @@ class CharactersFragment : Fragment() {
         recyclerView.adapter = recyclerViewAdapter
         recyclerViewAdapter.onItemClick = { character ->
             val action =
-                CharactersFragmentDirections.actionCharactersFragmentToCharacterDetailFragment()
+                CharactersFragmentDirections.actionCharactersFragmentToCharacterDetailFragment(character)
             findNavController().navigate(action)
         }
     }

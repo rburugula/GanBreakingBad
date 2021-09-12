@@ -6,4 +6,8 @@
     <string name="error_connecting_to_server">Error connecting to server</string>
     <string name="character_fragment">Characters</string>
     <string name="character_fragment_detail">Character Info</string>
+    <string name="occupation">occupation</string>
+    <string name="status">status</string>
+    <string name="nick_name">nick name</string>
+    <string name="season_appearance">season appearance</string>
 </resources>
