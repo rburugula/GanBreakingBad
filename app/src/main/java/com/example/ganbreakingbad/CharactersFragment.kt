@@ -60,7 +60,7 @@ class CharactersFragment : Fragment(), SearchView.OnQueryTextListener {
     }
 
     private fun initViewModel() {
-        viewModel.characterLiveData.observe(viewLifecycleOwner) { result ->
+        viewModel.charactersLiveData.observe(viewLifecycleOwner) { result ->
             result.onSuccess {
                 recyclerViewAdapter.setUpdatedData(it)
             }
