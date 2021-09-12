@@ -5,5 +5,5 @@ import retrofit2.http.GET
 
 interface ApiServiceInterface {
     @GET("api/characters")
-    suspend fun getCharacters(): ArrayList<Character>
+    suspend fun fetchCharacters(): ArrayList<Character>
 }
