@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.widget.SearchView
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -15,7 +16,7 @@ import com.example.ganbreakingbad.databinding.FragmentCharactersBinding
 import com.example.ganbreakingbad.viewModel.CharactersViewModel
 import javax.inject.Inject
 
-class CharactersFragment : Fragment() {
+class CharactersFragment : Fragment(), SearchView.OnQueryTextListener {
 
     @Inject
     lateinit var viewModel: CharactersViewModel
@@ -41,6 +42,7 @@ class CharactersFragment : Fragment() {
     }
 
     private fun initView() {
+        binding.searchView.setOnQueryTextListener(this)
         val recyclerView = binding.recyclerView
         recyclerView.layoutManager = LinearLayoutManager(activity)
         val decoration = DividerItemDecoration(activity, DividerItemDecoration.VERTICAL)
@@ -50,7 +52,9 @@ class CharactersFragment : Fragment() {
         recyclerView.adapter = recyclerViewAdapter
         recyclerViewAdapter.onItemClick = { character ->
             val action =
-                CharactersFragmentDirections.actionCharactersFragmentToCharacterDetailFragment(character)
+                CharactersFragmentDirections.actionCharactersFragmentToCharacterDetailFragment(
+                    character
+                )
             findNavController().navigate(action)
         }
     }
@@ -71,5 +75,15 @@ class CharactersFragment : Fragment() {
     private fun showErrrorMessage() {
         Toast.makeText(context, getString(R.string.error_connecting_to_server), Toast.LENGTH_LONG)
             .show()
+    }
+
+    override fun onQueryTextSubmit(query: String?): Boolean {
+        recyclerViewAdapter.filter.filter(query)
+        return false
+    }
+
+    override fun onQueryTextChange(newText: String?): Boolean {
+        recyclerViewAdapter.filter.filter(newText)
+        return false
     }
 }
